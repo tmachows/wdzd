@@ -52,6 +52,27 @@ def print_radius(ball, center, n):
         plt.savefig('radius' + str(n) + '.png', dpi=96)
         plt.clf()
 
+def print_radius_v2(cube, center, n,r):
+    if n in plot_ns:
+        y = []
+        x = []
+
+        for j in np.arange(0.1,r,0.1):
+            gt = 0
+            for i in cube:
+                if distance.euclidean(i, center) > j:
+                    gt += 1
+
+            le = ((len(cube) - gt)/len(cube))*100
+            y.append(le)
+            x.append(j)
+            if le >99.9:
+                break
+        plt.figure()
+        plt.plot(x,y)
+        plt.savefig('radius_v2_' + str(n) + '.png', dpi=96)
+        plt.clf()
+
 def print_radius2d(ball, center, n):
     objects = ('less', 'gretter')
     y_pos = np.arange(len(objects))
@@ -107,6 +128,7 @@ def main():
         mean_ball.append(np.mean(dist_ball))
 
         print_radius(cube, center, n)
+        print_radius_v2(cube, center, n,np.sqrt(n))
         print_radius2d(pca[0],[0.5] * 2, n)
 
     print_dist(mean_ball, mean_cube)
