@@ -25,19 +25,19 @@ def do_pca(ball, cube, n):
     reduced_cube = pca_cube.fit(cube).transform(cube)
     reduced_ball = pca_ball.fit(ball).transform(ball)
     if n in plot_ns:
-        colors = ['navy', 'red']
+        colors = ['blue', 'red']
         plt.figure()
         plt.scatter(reduced_cube[:, 0], reduced_cube[:, 1], marker='x', color=colors[0])
         plt.scatter(reduced_ball[:, 0], reduced_ball[:, 1], marker='.', color=colors[1])
         plt.xlabel('x')
         plt.ylabel('y')
-        plt.title('Cartesian coordinate PCA: HyperCube[navy] HyperBall[red]')
+        plt.title('Cartesian coordinate PCA: HyperCube[blue] HyperBall[red]')
         plt.savefig('file' + str(n) + '.png', dpi=96)
         plt.clf()
     return (reduced_cube, reduced_ball)
 
 def print_radius(ball, center, n):
-    objects = ('less', 'gretter')
+    objects = ('inside', 'out')
     y_pos = np.arange(len(objects))
     if n in plot_ns:
         gt = 0
@@ -53,7 +53,7 @@ def print_radius(ball, center, n):
         plt.clf()
 
 def print_radius2d(ball, center, n):
-    objects = ('less', 'gretter')
+    objects = ('inside', 'out')
     y_pos = np.arange(len(objects))
     if n in plot_ns:
         gt = 0
@@ -71,11 +71,11 @@ def print_radius2d(ball, center, n):
 def print_dist(mean_ball, mean_cube):
     rang = range(3, 201)
     plt.figure()
-    plt.plot(rang, mean_cube, color='navy')
+    plt.plot(rang, mean_cube, color='blue')
     plt.plot(rang, mean_ball, marker='.', color='red')
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title('distans from center: HyperCube[navy] HyperBall[red]')
+    plt.title('distans from center: HyperCube[blue] HyperBall[red]')
     plt.savefig('distance.png', dpi=96)
     plt.clf()
 
