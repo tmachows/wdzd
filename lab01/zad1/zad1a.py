@@ -1,4 +1,3 @@
-
 import numpy as np
 from scipy.spatial import distance
 import matplotlib.pyplot as plt
@@ -13,14 +12,12 @@ def generate_point_pair(n):
 	return (point1, point2)
 
 
-def count_distance(point_pair):
-	return distance.euclidean(point_pair[0], point_pair[1])
+def count_distance(point_pair, n):
+	return distance.euclidean(point_pair[0], point_pair[1]) / np.sqrt(n)
 
 
 def create_chart(n, distances):
 	hist, bins = np.histogram(distances, bins=20)
-	width = 0.2 * (bins[1] - bins[0])
-	center = (bins[:-1] + bins[1:]) / 2
 	plt.hist(distances, bins)
 	plt.savefig('a_dim_'+str(n)+'.png', dpi=96)
 	plt.clf()
@@ -33,9 +30,9 @@ def main():
 	for n in range(2, 201):
 		distances = []
 
-		for i in range(1, 1001):
+		for i in range(1, 4001):
 			point_pair = generate_point_pair(n)
-			distance = count_distance(point_pair)
+			distance = count_distance(point_pair, n)
 			distances.append(distance)
 
 		mean = np.mean(distances)
