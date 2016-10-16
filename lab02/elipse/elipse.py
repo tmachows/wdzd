@@ -26,7 +26,7 @@ def main():
     eigw, eigv = np.linalg.eig(cov)
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    U,V = zip(*eigv)
+    U,V = zip(*(eigv*eigw * 2))
     ax.quiver([0,0],[0,0],U,V,angles='xy',scale_units='xy',scale=1)
     ax.scatter(sample[:, 0], sample[:, 1])
     plt.show()
